@@ -1,0 +1,8 @@
+-Project set up, ------------------------------------------done
+-Create player and enemy-canvas, sprite class, gravity.----done
+-------------------------------------------------------------------------understood above
+
+-Move characters with event listeners
+-Attacks
+-Health bar interface
+-Game timer and game over
