@@ -20,6 +20,7 @@ class Sprite {
     //pass an argument for 'position' to the sprite class, put it in curly brackets to make it pass as one object to avoid load order error
     this.position = position; //whenever you creat a property within a class in a constructor it should be prefaced by this.
     this.velocity = velocity; //added this arg to simulate gravity
+    this.width = 50;
     this.height = 150;
     this.lastKey;
     this.attackBox = { //arg represents attack box property
@@ -36,7 +37,7 @@ class Sprite {
     c.fillRect(
       this.position.x,
       this.position.y,
-      50 /*px wide */,
+      this.width /*px wide */,
       this.height /*px tall */
     );
 
@@ -87,6 +88,7 @@ const enemy = new Sprite({
     x: 800, //x coordinate on canvas
     y: 200, //y coordinate on canvas
   },
+  // width:10,
   velocity: {
     //create new object from sprite class
     x: 0, //x coordinate on canvas
@@ -149,6 +151,12 @@ function animate() {
     enemy.velocity.x = -5
   } else if (keys.d.pressed && enemy.lastKey === 'd') {
     enemy.velocity.x = 6
+  }
+
+  //detect for collision below
+  if (player.attackBox.position.x + 
+    player.attackBox.width >= enemy.position.x && player.attackBox.position.x <= enemy.position.x + enemy.width ) {
+    console.log('hit')
   }
 } //the above is an infinite animation loop
 
