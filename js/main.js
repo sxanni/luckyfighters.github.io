@@ -215,7 +215,11 @@ function animate() {
     enemy.isAttacking //handles the action of attacking so the above only count wwhnen player is attacking
     ) {
       enemy.isAttacking = false
+      player.health -= 20 //minus 20 from health when player hits enemy
+
     console.log('enemy attack succesful')
+    document.querySelector('#playerHealth').style.width = player.health +'%' // select width of bar and take away the % value of enemy.health 
+
 
   }
 } //the above is an infinite animation loop

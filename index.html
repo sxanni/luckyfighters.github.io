@@ -30,16 +30,25 @@
         "
       >
         <!-- player health -->
-        <div
-          id="playerHealth"
-          style="
+        <div id="playerHp" style="position: relative; height: 30px;width:100%;">
+            <div id="healthBowl"style="margin-top: 0px; background-color: silver;
+            height: 20px;
+            width: 100%;"></div>
+            <!-- red bar health that depletes -->
+            <div id="playerHealth" style="position: absolute;
             margin-top: 0px;
 
-            background-color: silver;
-            height: 20px;
+            background-color: red;
+            height: 30px;
             width: 100%;
-          "
-        ></div>
+            
+                                        /* below stretches this div to fit the full height and width of its parent container */
+            align-items: baseline; 
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;"></div>
+        </div>
         <!-- time -->
         <div
           id="timer"
