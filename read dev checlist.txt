@@ -3,6 +3,7 @@
 -------------------------------------------------------------------------understood above
 
 -Move characters with event listeners---------- done
--Attacks
+-Attacks----------------------done. key take away(colisison detection and pinning attack box to sprite position)
+------------------------------------------------------------
 -Health bar interface
 -Game timer and game over

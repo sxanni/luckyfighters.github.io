@@ -36,7 +36,6 @@ class Sprite {
   
     this.color = color //color property for sprite class so we can differentiate between player and enemy
     this.isAttacking //property to show when player is attacking- arm this by adding an attack method right afyter update method
-    this.health = 100
   }
 
   draw() {
@@ -204,9 +203,7 @@ function animate() {
     player.isAttacking //handles the action of attacking so the above only count wwhnen player is attacking
     ) {
       player.isAttacking = false
-      enemy.health -= 20 //minus 20 from health when player hits enemy
     console.log('player attack successful')
-    document.querySelector('#enemyHealth').style.width = enemy.health +'%' // select width of bar and take away the % value of enemy.health 
   }
   if (rectangularCollision({ //call rectangular collision
     rectangle1: enemy,
@@ -216,7 +213,6 @@ function animate() {
     ) {
       enemy.isAttacking = false
     console.log('enemy attack succesful')
-
   }
 } //the above is an infinite animation loop
 
