@@ -1,9 +1,10 @@
--Project set up, ------------------------------------------done
--Create player and enemy-canvas, sprite class, gravity.----done
+x---Project set up, ------------------------------------------done
+x---Create player and enemy-canvas, sprite class, gravity.----done
 -------------------------------------------------------------------------understood above
 
--Move characters with event listeners---------- done
--Attacks----------------------done. key take away(colisison detection and pinning attack box to sprite position)
-------------------------------------------------------------
--Health bar interface
+x---Move characters with event listeners---------- done
+x---Attacks----------------------done. key take away(colisison detection and pinning attack box to sprite position)
+                ------------------------------------------------------------
+x---Health bar interface --------------------DONEE-- key take(css and html to position things relative to a paticular parent div)
+
 -Game timer and game over

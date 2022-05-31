@@ -168,6 +168,22 @@ function rectangularCollision({rectangle1, rectangle2}) { // initially player = 
   
 }
 
+//decrease timer
+let timer =20 //set total imer time
+function decreaseTimer() {
+  setTimeout(decreaseTimer, 1500)// decreases timer
+  if (timer > 0) {
+    timer-- //decrease by 1/ decrement
+    document.querySelector('#timer').innerHTML = timer //set html id as value of timer after every decrement
+  }
+  //after timer hits 0 with above code
+  if (player.health === enemy.health) {
+    console.log('Draw') 
+    
+  }
+}
+decreaseTimer()
+
 //create animation loop to simulate gravity constant
 function animate() {
   window.requestAnimationFrame(animate); //this call represents whatever function we want to loop
@@ -218,7 +234,7 @@ function animate() {
       player.health -= 20 //minus 20 from health when player hits enemy
 
     console.log('enemy attack succesful')
-    document.querySelector('#playerHealth').style.width = player.health +'%' // select width of bar and take away the % value of enemy.health 
+    document.querySelector('#playerHealth').style.width = player.health +'%' // select width of bar and take away the % value of player.health when enemy attacks
 
 
   }
