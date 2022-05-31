@@ -1,127 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LUCKY FIGHTER</title>
     <link rel="stylesheet" href="css/style.css" />
-    <style>
-        /* *{
-            box-sizing: border-box; 
-            a key property ot make sure our sizes arent affected by padding
-        } */
-    </style>
-</head>
+  </head>
 
-<body>
-    <div id="centerAll" style="
-        display: flex;
-        align-content: center;
-        justify-content: center;
-        padding-top: 10%;
-      ">
-        <div class="main-div" style="position: relative; display: inline-block">
-            <div class="bar-container" style="
-            display: flex;
-            align-items: center;
-            padding: 30px;
-            margin-top: 20px;
-            margin-left: 1px;
-            position: absolute;
-            background-color: black;
-            width: 1025px;
-            height: 60px;
-            right: 0.9px;
-            left: 0.5px;
-          ">
-                <!-- player health -->
-                <div id="playerHp" style="
-              position: relative;
-              height: 30px;
-              width: 100%;
-              display: flex;
-              justify-content: flex-end;
-              align-items: flex-end;
-            ">
-                    <div id="healthBowl" style="
-                margin-top: 0px;
-                background-color: silver;
-                height: 20px;
-                width: 100%;
-              "></div>
-                    <!-- red bar health that depletes -->
-                    <div id="playerHealth" style="
-                position: absolute;
-                margin-top: 0px;
+  <body>
+    <div id="centerAll">
+      <div class="main-div">
+        <div class="bar-container">
+          <!-- player health -->
+          <div id="playerHp">
+            <div id="healthBowl"></div>
+            <!-- red bar health that depletes -->
+            <div id="playerHealth"></div>
+          </div>
+          <!-- timer-->
+          <div id="timer">15</div>
 
-                background-color: red;
-                height: 30px;
-                width: 100%;
-
-                align-items: baseline;
-                top: 0;
-                right: 0;
-              "></div>
-                </div>
-                <!-- timer-->
-                <div id="timer" style="
-              border: 7px solid black;
-              background-color: bisque;
-              width: 100px;
-              height: 70px;
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              flex-shrink: 0;
-              border-radius: 0px;
-              font-size: 70px;
-            ">
-                    15
-                </div>
-
-                <!-- enemy health -->
-                <div id="enemyHp" style="position: relative; height: 30px; width: 100%">
-                    <div id="healthBowl" style="
-                margin-top: 0px;
-                background-color: silver;
-                height: 20px;
-                width: 100%;
-              "></div>
-                    <div id="enemyHealth" style="
-                position: absolute;
-                margin-top: 0px;
-                background-color: red;
-                height: 30px;
-                width: 100%;
-                align-items: baseline;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-              "></div>
-                </div>
-            </div>
-
-                <div id="Draw">DRAWW</div>
-
-            <div id="canvasContainer" style="width: 100%">
-                <canvas style="
-              padding-left: 0;
-              padding-right: 0;
-              margin-left: auto;
-              margin-right: auto;
-              /* display: block; */
-              border: 2px solid rgb(224, 19, 19);
-            ">
-                </canvas>
-            </div>
+          <!-- enemy health -->
+          <div id="enemyHp">
+            <div id="healthBowl"></div>
+            <div id="enemyHealth"></div>
+          </div>
         </div>
+        <!-- --------------------Game Result Displays-------------------------------------------------------------- -->
+        <div class="endGame" id="draw">D R A W</div>
+        <div class="endGame" id="playerWin">PLAYER IS VICTORIOUS</div>
+        <div class="endGame" id="draw">ENEMY IS VICTORIOUS</div>
+
+        <!-- --------------------Canvas display-------------------------------------------------------------- -->
+        <div id="canvasContainer">
+          <canvas> </canvas>
+        </div>
+      </div>
     </div>
 
     <script src="js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js "></script>
-</body>
-
+  </body>
 </html>

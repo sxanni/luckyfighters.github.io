@@ -1,37 +1,120 @@
 *{
+    /* a key property ot make sure our sizes arent affected by padding */
     box-sizing: border-box;
 }
 body{
 
     background-image:url("img/snowscape.jpg");
 }
-main-div{
+.main-div{
+    position: relative; display: inline-block
     /* position: relative; */
 }
-bar-container{
-    /* position: absolute; */
-    background-color: orange;
-    width:300px; 
-    height:30px;
-}
-playerHealth{
-    /* margin-top: 200px; */
-    /* display:flex; */
-    background-color: purple ;
-    height: 30px;
-    width: 200px;
+#centerAll{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    padding-top: 10%;
 }
 
+.bar-container{
+    display: flex;
+            align-items: center;
+            padding: 30px;
+            margin-top: 20px;
+            margin-left: 1px;
+            position: absolute;
+            background-color: black;
+            width: 1025px;
+            height: 60px;
+            right: 0.9px;
+            left: 0.5px;
+}
+
+#enemyHp{
+    position: relative; height: 30px; width: 100%;
+}
+
+#playerHealth{
+    position: absolute;
+    margin-top: 0px;
+
+    background-color: red;
+    height: 30px;
+    width: 100%;
+
+    align-items: baseline;
+    top: 0;
+    right: 0;
+}
+
+#playerHp{
+    position: relative;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+#healthBowl{
+    margin-top: 0px;
+                background-color: silver;
+                height: 20px;
+                width: 100%;
+}
+
+#timer{
+    border: 7px solid black;
+              background-color: bisque;
+              width: 100px;
+              height: 70px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              flex-shrink: 0;
+              border-radius: 0px;
+              font-size: 70px;
+}
+
+#enemyHealth{
+    position: absolute;
+                margin-top: 0px;
+                background-color: red;
+                height: 30px;
+                width: 100%;
+                align-items: baseline;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+}
+
+
+#canvasContainer{
+    width: 100%;
+  
+}
 canvas{
-    border-style:solid;
-    border-color: red;
-    border: 9px;
-    /* position: absolute; */
-    /* center canvas in page*/
-     top: 50%;
-    left:50%;
-    /* transform: translate(-50%, -50%);  */
-    /* width:900px; */
-    /* height: 600px; */
-    /* not sure, thought it would be easy */
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid rgb(224, 19, 19);
+    
+}
+
+.endGame{
+    font-size: 80px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial,
+              sans-serif;
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            color: white;
+            display: none;
+            align-items: center;
+            justify-content: center;
 }

@@ -169,18 +169,27 @@ function rectangularCollision({rectangle1, rectangle2}) { // initially player = 
 }
 
 //decrease timer
-let timer =20 //set total imer time
+let timer =10 //set total imer time
 function decreaseTimer() {
   setTimeout(decreaseTimer, 1500)// decreases timer
   if (timer > 0) {
     timer-- //decrease by 1/ decrement
     document.querySelector('#timer').innerHTML = timer //set html id as value of timer after every decrement
-  }
+  }else
   //after timer hits 0 with above code
   if (player.health === enemy.health) {
+    document.querySelector('#draw').style.display = "flex" //incase of draw display draw text
     console.log('Draw') 
-    
+  }else
+  if (player.health > enemy.health) {
+    document.querySelector('#playerWin').style.display = "flex"// if player has more health player wins
+    console.log('Draw') 
+  }else
+  if (player.health < enemy.health) {
+    document.querySelector('#enemyWin').style.display = "flex"//if enemy has more health enemy wins
+    console.log('Draw') 
   }
+  
 }
 decreaseTimer()
 
