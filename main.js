@@ -33,7 +33,7 @@ const king = new Sprite({//create new sprite object called background that takes
   width: 2604, //specify its width and  height
   height: 128,
   scale: 2.5,
-  frameMax:12.5 , 
+  frameMax:12 , 
   imageSrc: './assets/kingIdle.png'
 })
 
