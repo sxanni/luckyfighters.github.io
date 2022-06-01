@@ -20,7 +20,7 @@ const background = new Sprite({//create new sprite object called background that
     x:0,
     y:0
   },
-  width: 3024, //specify its width and  height
+  width: 1024, //specify its width and  height
   height: 576,
   scale:2.7,
   imageSrc: './assets/glacialMount.png' 
@@ -33,7 +33,7 @@ const king = new Sprite({//create new sprite object called background that takes
   width: 2604, //specify its width and  height
   height: 128,
   scale: 2.5,
-  frameMax:12 , 
+  frameMax:18, 
   imageSrc: './assets/kingIdle.png'
 })
 

@@ -15,18 +15,19 @@ class Sprite {
     this.image.src = imageSrc
     this.scale = scale
     this.frameMax = frameMax
+    this.frameCurrent = 0
   }
 
   draw() {
       c.drawImage(
         this.image, //draw image in canvas
+        0,// this.frameCurrent * (this.width/this.framesMax),
         0,
-        0,
-        this.width / this.frameMax, //initiate crop
+        this.width / this.frameMax, //initiate crop to one frame
         this.height,
         this.position.x, 
         this.position.y, 
-        (this.width /this.frameMax) * this.scale, 
+        (this.width / this.frameMax) * this.scale, 
         this.height * this.scale
         )  //multiply height by scale
   }

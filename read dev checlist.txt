@@ -18,4 +18,21 @@
     Sprites with animation
     Player Sprites
     Enemy Sprites
+
+
+
+
+player1 controls
+
+left = left arrow
+right = right arrow
+jump = up arrow
+attack = spacebar
+    
+enemy controls
+
+left = a key
+right = d key
+jump = w key
+attack = f key
     
