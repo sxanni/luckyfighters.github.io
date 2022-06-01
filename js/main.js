@@ -183,13 +183,14 @@ function decreaseTimer() {
   }else
   if (player.health > enemy.health) {
     document.querySelector('#playerWin').style.display = "flex"// if player has more health player wins
-    console.log('Draw') 
+    console.log('player wins') 
   }else
   if (player.health < enemy.health) {
     document.querySelector('#enemyWin').style.display = "flex"//if enemy has more health enemy wins
-    console.log('Draw') 
+    console.log('enemy wins') 
   }
-  
+  // reload()
+
 }
 decreaseTimer()
 
@@ -233,7 +234,7 @@ function animate() {
     console.log('player attack successful')
     document.querySelector('#enemyHealth').style.width = enemy.health +'%' // select width of bar and take away the % value of enemy.health 
   }
-  if (rectangularCollision({ //call rectangular collision
+  if (rectangularCollision({ //call r ectangular collision
     rectangle1: enemy,
     rectangle2: player
   }) && //handle colision on top and bottom of hit/attackBox 
@@ -245,6 +246,10 @@ function animate() {
     console.log('enemy attack succesful')
     document.querySelector('#playerHealth').style.width = player.health +'%' // select width of bar and take away the % value of player.health when enemy attacks
 
+
+  }
+  //endgame based pn health
+  if(enemy.health <= 0 || player.health <= 0 ){
 
   }
 } //the above is an infinite animation loop
