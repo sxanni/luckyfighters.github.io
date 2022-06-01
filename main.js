@@ -10,103 +10,55 @@ c.fillRect(0, 0, canvas.width, canvas.height); //<---set x and y positions to = 
 
 //---------------------create player and enemy--------------------------//
 
-//create sprite class for sprites, whenver theres a sprite object created from sprite class it will execute the constructor
+//create sprite class for sprites,(its within classes.js) whenver theres a sprite object created from sprite class it will execute the constructor
 //a main property in gane dev is position, each spritewill have its own indeopendent position so we
 
 const gravity = 0.4;
 
-class Sprite {
-  constructor({ position, velocity, color = 'red', offset }) { //pass argumentts into constructor
-    //pass an argument for 'position' to the sprite class, put it in curly brackets to make it pass as one object to avoid load order error
-    this.position = position; //whenever you creat a property within a class in a constructor it should be prefaced by this.
-    this.velocity = velocity; //added this arg to simulate gravity
-    this.width = 50;
-    this.height = 150;
-    this.lastKey;
-    this.attackBox = { //arg represents attack box property
-      // position: this.position , //position is same as sprite position as attacl comes from player body
-      position: {
-        x:this.position.x, //attack box position updates manually based on position of the parent
-        y:this.position.y
-      },  
-      offset,
-      width: 100, //default width and height of attack box
-      height: 50
-    },
-  
-    this.color = color //color property for sprite class so we can differentiate between player and enemy
-    this.isAttacking //property to show when player is attacking- arm this by adding an attack method right afyter update method
-  }
+const background = new Sprite({//create new sprite object called background that takes in position and image source
+  position: { //specify its position
+    x:0,
+    y:0
+  },
+  width: 3024, //specify its width and  height
+  height: 576,
+  scale:2.7,
+  imageSrc: './assets/glacialMount.png' 
+})
+const king = new Sprite({//create new sprite object called background that takes in position and image source
+  position: { //specify its position
+    x:350,
+    y:320
+  },
+  width: 2604, //specify its width and  height
+  height: 128,
+  scale: 2.5,
+  frameMax:12.5 , 
+  imageSrc: './assets/kingIdle.png'
+})
 
-  draw() {
-    //define what your player looks like
-    c.fillStyle = this.color; //color
-    c.fillRect(
-      this.position.x,
-      this.position.y,
-      this.width /*px wide */,
-      this.height /*px tall */
-    );
-
-    //attack box
-    if (this.isAttacking){ //if statement to only draw attackbox when this.isattacking property is true
-    c.fillStyle = "white"
-    c.fillRect(
-      this.attackBox.position.x, // this argument is - position of attck box on x axis
-      this.attackBox.position.y, //position of attackbox on y axis
-      this.attackBox.width,
-      this.attackBox.height
-      )
-    }
-  }
-
-  update() {
-    this.draw(); //calling the draw() method
-    this.attackBox.position.x = this.position.x + this.attackBox.offset.x
-    this.attackBox.position.y = this.position.y
-
-    this.position.x += this.velocity.x; //define how sprite move on x axis
-    this.position.y += this.velocity.y; // ooo
-    // this.velocity.y += 10// overtime position.y is going to have 10 pixels added to it for each frame that is looped over at a rate of 10pixels/second or per loop
-    //if stratement to stop sprite falling off the page if its bottom touchesthe lower edge of the page, by seeting velocity to 0
-
-    if (this.position.y + this.height + this.velocity.y >= canvas.height) {
-      // if the lowest point of the rectangle is equals to the canvas edge/height
-      this.velocity.y = 0; // rdeuce velocity to 0
-    } else this.velocity.y += gravity; //if above isnt true, gravity is applied until bottom edge touches canvas (add acceleration by incrementing gravity value to fall speed and closes gap btwn sprite and canvas floor)
-  }
-
-  attack() {
-    this.isAttacking = true //when we call attack method this is = 2 true
-
-    setTimeout(() => { //use settimeout to time limit attack when this method is triggerd
-      this.isAttacking = false //set this.isAttacking back to false after 100 milliseconds
-    }, 100);
-  }
-}
-
-const player = new Sprite({
+const player = new Fighter({
   position: {
     //create new object from sprite class
     x: 0, //x coordinate on canvas
-    y: 0 //y coordinate on canvas
+    y: 0, //y coordinate on canvas
   },
   velocity: {
     //create new object from sprite class
     x: 0, //x coordinate on canvas
-    y: 5 //y coordinate on canvas
+    y: 5, //y coordinate on canvas
   },
   offset: {
     x: 0,
-    y: 0
+    y: 0,
   },
-  
-  color: 'blue'
+
+  color: "blue",
 });
 
 player.draw(); //display / draw player on canvas
 
-const enemy = new Sprite({
+const enemy = new Fighter({
   //create new object from sprite class
   position: {
     //create new object from sprite class
@@ -121,9 +73,9 @@ const enemy = new Sprite({
   },
   offset: {
     x: -50,
-    y: 0
+    y: 0,
   },
-  color: 'red'
+  color: "red",
 });
 
 enemy.draw(); //display / draw enemy on canvas
@@ -149,36 +101,28 @@ const keys = {
   },
   w: {
     pressed: false, //pressed property to monitor when button is pressed is false by default
-  }
+  },
 };
 
 let lastKey; // const used to grab the last key that waas pressed, fixing left and rigt button press bug
 
 
-//seperate and reusable function to monitor collision between attack box and opoponent box/body
-function rectangularCollision({rectangle1, rectangle2}) { // initially player = rect1 and enemy = rect2 inside animatoion function, but that was not reusable
-  return(
-    rectangle1.attackBox.position.x <= rectangle2.position.x + rectangle2.width && //handle collission from left to right side of enemy/ hit box
-    rectangle1.attackBox.position.x + rectangle1.attackBox.width >= rectangle2.position.x && 
-    rectangle1.attackBox.position.y + rectangle1.attackBox.height >= rectangle2.position.y &&
-    rectangle1.attackBox.position.y <=  rectangle2.position.y + rectangle2.height //handle colision on top and bottom of hit/attackBox 
-    
-  )
-  
-}
+decreaseTimer();
 
 //create animation loop to simulate gravity constant
-function animate() {
+function animate() { 
   window.requestAnimationFrame(animate); //this call represents whatever function we want to loop
   c.fillStyle = "black";
   c.fillRect(0, 0, canvas.width, canvas.height);
   // c.clearlRect(0, 0, canvas.width, canvas.height)// clears/refreshes canvas to refresh the drawing and avoid object leaving residual/paint like effect(also clears background)
+  background.update()
+  king.update()
   player.update();
   enemy.update();
   // console.log('number of loops');<-- to see how many times its looping in chrome dev console
 
-  player.velocity.x = 0
-  enemy.velocity.x = 0
+  player.velocity.x = 0;
+  enemy.velocity.x = 0;
 
   //if last key is left aro, and left key is pressed, player moves left
   //player movement
@@ -189,30 +133,44 @@ function animate() {
   }
 
   //enemy movement
-  if (keys.a.pressed && enemy.lastKey === 'a') {
-    enemy.velocity.x = -5
-  } else if (keys.d.pressed && enemy.lastKey === 'd') {
-    enemy.velocity.x = 6
+  if (keys.a.pressed && enemy.lastKey === "a") {
+    enemy.velocity.x = -5;
+  } else if (keys.d.pressed && enemy.lastKey === "d") {
+    enemy.velocity.x = 6;
   }
 
   //detect for collision below
-  if (rectangularCollision({ //call rectangular collision
-    rectangle1: player,
-    rectangle2: enemy
-  }) && //handle colision on top and bottom of hit/attackBox 
+  if (
+    rectangularCollision({
+      //call rectangular collision
+      rectangle1: player,
+      rectangle2: enemy,
+    }) && //handle colision on top and bottom of hit/attackBox
     player.isAttacking //handles the action of attacking so the above only count wwhnen player is attacking
-    ) {
-      player.isAttacking = false
-    console.log('player attack successful')
+  ) {
+    player.isAttacking = false;
+    enemy.health -= 20; //minus 20 from health when player hits enemy
+    console.log("player attack successful");
+    document.querySelector("#enemyHealth").style.width = enemy.health + "%"; // select width of bar and take away the % value of enemy.health
   }
-  if (rectangularCollision({ //call rectangular collision
-    rectangle1: enemy,
-    rectangle2: player
-  }) && //handle colision on top and bottom of hit/attackBox 
+  if (
+    rectangularCollision({
+      //call rectangular collision
+      rectangle1: enemy,
+      rectangle2: player,
+    }) && //handle colision on top and bottom of hit/attackBox
     enemy.isAttacking //handles the action of attacking so the above only count wwhnen player is attacking
-    ) {
-      enemy.isAttacking = false
-    console.log('enemy attack succesful')
+  ) {
+    enemy.isAttacking = false;
+    player.health -= 20; //minus 20 from health when player hits enemy
+
+    console.log("enemy attack succesful");
+    document.querySelector("#playerHealth").style.width = player.health + "%"; // select width of bar and take away the % value of player.health when enemy attacks
+  }
+
+  //endgame based pn health
+  if (enemy.health <= 0 || player.health <= 0) {
+    determineWinner({player, enemy, timerId})
   }
 } //the above is an infinite animation loop
 
@@ -239,8 +197,8 @@ window.addEventListener("keydown", (event) => {
       player.velocity.y = -10; //player velocity is -12 so it jumps to -12, before gravity acts to pull it back down
       break;
     case " ":
-      player.attack()
-      break
+      player.attack();
+      break;
     case "a":
       keys.a.pressed = true; //puts value into variable last key. This makes sure the value of last key is always whichever key was pressed
       enemy.lastKey = "a";
@@ -255,11 +213,11 @@ window.addEventListener("keydown", (event) => {
       // keys.w.pressed = true //puts value into variable last key. This makes sure the value of last key is always whichever key was pressed
       enemy.velocity.y = -10;
       break;
-      case "f":
-        enemy.attack()
-        break
+    case "f":
+      enemy.attack();
+      break;
   }
-  
+
   console.log(event.key);
 });
 
@@ -281,7 +239,7 @@ window.addEventListener("keyup", (event) => {
       keys.ArrowUp.pressed = false;
       break;
 
-      //enemy key up cases to stop movement on keyup/ key release below
+    //enemy key up cases to stop movement on keyup/ key release below
     case "a":
       keys.a.pressed = false;
       enemy.velocity.x = 0; //player velocity is zero, so it stops
